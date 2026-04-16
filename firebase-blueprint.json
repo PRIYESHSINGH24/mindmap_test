@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLogin": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Problem": {
+      "title": "Problem",
+      "description": "A DSA problem entry",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Owner UID" },
+        "title": { "type": "string" },
+        "platform": { "type": "string", "description": "e.g., LeetCode, Codeforces" },
+        "url": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "dateSolved": { "type": "string", "format": "date-time" },
+        "timeTaken": { "type": "number", "description": "Time in minutes" },
+        "attempts": { "type": "number" },
+        "status": { "type": "string", "enum": ["Solved", "Revision Pending", "Failed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "smartTags": { "type": "array", "items": { "type": "string" }, "description": "AI-detected patterns" }
+      },
+      "required": ["uid", "title", "difficulty", "status"]
+    },
+    "Solution": {
+      "title": "Solution",
+      "description": "A code solution for a problem",
+      "type": "object",
+      "properties": {
+        "problemId": { "type": "string" },
+        "uid": { "type": "string" },
+        "language": { "type": "string", "enum": ["cpp", "java", "python", "javascript"] },
+        "code": { "type": "string" },
+        "version": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["problemId", "uid", "language", "code"]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "Notes for a problem",
+      "type": "object",
+      "properties": {
+        "problemId": { "type": "string" },
+        "uid": { "type": "string" },
+        "content": { "type": "string", "description": "Markdown content" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["problemId", "uid", "content"]
+    },
+    "Revision": {
+      "title": "Revision",
+      "description": "Spaced repetition revision schedule",
+      "type": "object",
+      "properties": {
+        "problemId": { "type": "string" },
+        "uid": { "type": "string" },
+        "nextRevisionDate": { "type": "string", "format": "date-time" },
+        "revisionCount": { "type": "number" },
+        "interval": { "type": "number", "description": "Days until next revision" }
+      },
+      "required": ["problemId", "uid", "nextRevisionDate"]
+    },
+    "Collection": {
+      "title": "Collection",
+      "description": "Custom problem groups",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "problemIds": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/problems/{problemId}": { "schema": "Problem", "description": "DSA problem entries" },
+    "/solutions/{solutionId}": { "schema": "Solution", "description": "Code solutions" },
+    "/notes/{noteId}": { "schema": "Note", "description": "Problem notes" },
+    "/revisions/{revisionId}": { "schema": "Revision", "description": "Revision schedules" },
+    "/collections/{collectionId}": { "schema": "Collection", "description": "User collections" }
+  }
+}

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --color-primary: oklch(0.58 0.18 260); /* Indigo Accent */
+    --color-primary-foreground: oklch(0.98 0.01 260);
+    
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-ring: var(--ring);
+}
+
+:root {
+    --background: #0A0A0B;
+    --foreground: #F9FAFB;
+    
+    --card: #141417;
+    --card-foreground: #F9FAFB;
+    
+    --popover: #141417;
+    --popover-foreground: #F9FAFB;
+    
+    --primary: #6366F1;
+    --primary-foreground: #FFFFFF;
+    
+    --secondary: #1E1E22;
+    --secondary-foreground: #F9FAFB;
+    
+    --muted: #1E1E22;
+    --muted-foreground: #9CA3AF;
+    
+    --accent: #2A2A2E;
+    --accent-foreground: #F9FAFB;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: #2A2A2E;
+    --input: #2A2A2E;
+    --ring: #6366F1;
+    
+    --radius: 0.75rem;
+
+    --sidebar: #141417;
+    --sidebar-foreground: #9CA3AF;
+    --sidebar-primary: #6366F1;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #1E1E22;
+    --sidebar-accent-foreground: #F9FAFB;
+    --sidebar-border: #2A2A2E;
+    --sidebar-ring: #6366F1;
+
+    --chart-1: #6366F1;
+    --chart-2: #10B981;
+    --chart-3: #F59E0B;
+    --chart-4: #EF4444;
+    --chart-5: #A855F7;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+  
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-heading);
+    font-style: italic;
+  }
+}
+
+/* Custom Sophisticated Dark Utility Classes */
+.ai-badge {
+    @apply inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 px-2 py-0.5 rounded text-[10px] font-bold text-white mb-3;
+}
+
+.ai-suggestion {
+    @apply bg-[#1e1e22] rounded-lg p-4 mb-4 border-l-4 border-primary;
+}
+
+.stat-card {
+    @apply bg-card border border-border p-5 rounded-xl transition-all hover:border-primary/50;
+}
+
+.stat-label {
+    @apply text-[11px] text-muted-foreground uppercase tracking-wider mb-2 font-semibold;
+}
+
+.stat-value {
+    @apply font-serif text-2xl font-medium italic;
+}
+
+.problem-table {
+  @apply w-full text-sm;
+}
+
+.problem-table th {
+  @apply text-left px-5 py-3 text-muted-foreground font-medium border-b border-border;
+}
+
+.problem-table td {
+  @apply px-5 py-4 border-b border-border;
+}
+
+.heatmap {
+  @apply grid grid-cols-[repeat(20,1fr)] gap-1 p-5;
+}
+
+.heat-cell {
+  @apply aspect-square bg-[#1e1e22] rounded-sm transition-colors;
+}
+
+.heat-cell.active-1 { @apply bg-indigo-900; }
+.heat-cell.active-2 { @apply bg-indigo-700; }
+.heat-cell.active-3 { @apply bg-indigo-500; }
+
+.markdown-body {
+  font-family: var(--font-sans);
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply font-serif italic font-bold tracking-tight mb-4 border-none pt-6;
+}
+
+.markdown-body p {
+  @apply mb-4 leading-relaxed text-muted-foreground;
+}
+
+.markdown-body code {
+  @apply bg-secondary px-1.5 py-0.5 rounded text-primary font-mono text-xs font-medium;
+}
+
+.markdown-body pre {
+  @apply bg-[#000] p-6 rounded-xl border border-border mb-6 overflow-x-auto;
+}
